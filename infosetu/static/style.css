@@ -1,0 +1,47 @@
+:root{--ink:#1f2340;--muted:#667085;--purple:#6d4bd8;
+--grad:linear-gradient(90deg,#14b8a6,#7c4dff 55%,#f0559a);
+--side:linear-gradient(180deg,#2bb3a3 0%,#7b6ee0 100%)}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;font-family:"Poppins","Segoe UI","Noto Sans Devanagari","Mangal",sans-serif;color:var(--ink);
+background:linear-gradient(135deg,#d9f5ec 0%,#dcecfb 25%,#e8e1fb 50%,#fde3ee 75%,#fff0dc 100%) fixed}
+a{color:var(--purple);text-decoration:none;font-weight:500}
+h1{font-size:28px;margin:6px 0 16px;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;display:inline-block}
+h3{margin-top:0}
+aside{position:fixed;left:0;top:0;bottom:0;width:200px;background:var(--side);padding:20px 16px;display:flex;flex-direction:column;gap:6px;box-shadow:4px 0 24px rgba(109,75,216,.25)}
+aside h2{margin:0 0 16px;letter-spacing:.5px;background:linear-gradient(90deg,#ffffff,#ffe3f1);-webkit-background-clip:text;background-clip:text;color:transparent}
+aside a{padding:10px 14px;border-radius:12px;color:#1f2340;font-weight:500}
+aside a:hover{background:rgba(255,255,255,.75);color:#6d4bd8}
+main{padding:22px;max-width:1100px;margin:auto}main.side{margin-left:220px;max-width:none}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;color:var(--muted)}
+.langs a{padding:5px 12px;border-radius:16px;margin-left:5px;background:rgba(255,255,255,.8);color:var(--ink)}
+.langs a.on{background:var(--grad);color:#fff}
+.card{background:rgba(255,255,255,.92);border-radius:18px;padding:18px;margin-bottom:16px;box-shadow:0 8px 28px rgba(109,75,216,.12)}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.cards .card{position:relative;overflow:hidden}
+.cards .card::before{content:"";position:absolute;left:0;top:0;right:0;height:5px;background:var(--grad)}
+.cards .card small{display:block;color:var(--muted);margin-top:4px}
+.cards b{font-size:32px;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+label{font-weight:500;font-size:14px}
+input,select,textarea{width:100%;padding:11px;margin:6px 0 10px;border:1px solid #d9d3f5;border-radius:12px;font:inherit;color:var(--ink);background:#fff}
+input:focus,select:focus,textarea:focus{outline:none;border-color:#7c4dff;box-shadow:0 0 0 3px rgba(124,77,255,.18)}
+button,.btn{background:var(--grad);color:#fff;border:0;cursor:pointer;display:inline-block;padding:11px 18px;border-radius:12px;font:inherit;font-weight:600;width:auto;box-shadow:0 6px 16px rgba(124,77,255,.3)}
+button:hover,.btn:hover{filter:brightness(1.07)}form button{width:100%}
+.filters{display:grid;grid-template-columns:2fr 1fr 1fr auto;gap:8px}.filters button{width:auto}.narrow{max-width:580px}
+table{width:100%;border-collapse:collapse}
+th{background:linear-gradient(90deg,#d9f7ef,#ece6ff,#ffe3f0);color:var(--ink);font-weight:600}
+th,td{padding:10px;text-align:left;border-bottom:1px solid #eee9fb;white-space:nowrap}
+tr:hover td{background:#faf8ff}.scroll{overflow-x:auto}
+.pill{padding:3px 12px;border-radius:14px;font-size:12px;font-weight:600;background:#ece6ff;color:#5b34c9}
+.pill.submitted{background:#ffe0ee;color:#b0286b}
+.pill.received{background:#ece6ff;color:#5b34c9}
+.pill.assigned{background:#f6e3ff;color:#8a2fb3}
+.pill.in_progress{background:#d3f4ee;color:#0b7a6c}
+.pill.resolved{background:#d3f6e4;color:#157347}
+.flash{background:linear-gradient(90deg,#d9f7ef,#ece6ff);padding:11px 14px;border-radius:12px;margin-bottom:12px;font-weight:500}
+.unread{font-weight:600}.desc{white-space:pre-wrap}
+.auth{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center;min-height:70vh}
+.hero h1{font-size:50px;margin:0;background:none;-webkit-text-fill-color:#4b2fb0;color:#4b2fb0}
+.bar{display:flex;align-items:center;gap:8px;margin:8px 0}.bar span{width:160px}
+.bar i{height:11px;background:var(--grad);border-radius:8px;display:block;min-width:4px}
+@media(max-width:800px){aside{position:static;width:auto;flex-direction:row;flex-wrap:wrap}main.side{margin-left:0}.cards,.grid,.auth,.filters{grid-template-columns:1fr}}

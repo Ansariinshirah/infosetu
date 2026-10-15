@@ -1,0 +1,8 @@
+<form method="get" class="filters"><input name="q" value="{{q}}" placeholder="{{t('search')}}">
+<select name="status"><option value="">{{t('all_status')}}</option>{% for s in STATUSES %}<option value="{{s}}" {{'selected' if s==status}}>{{status_label(s)}}</option>{% endfor %}</select>
+<select name="dept"><option value="">{{t('all_dept')}}</option>{% for d in depts() %}<option value="{{d.id}}" {{'selected' if d.id|string==dept}}>{{dept_label(d.slug)}}</option>{% endfor %}</select>
+<button>{{t('search')}}</button></form>
+<div class="scroll"><table><tr><th>{{t('request_id')}}</th>{% if admin %}<th>{{t('requester')}}</th>{% endif %}<th>{{t('department')}}</th><th>{{t('status')}}</th><th>{{t('date')}}</th></tr>
+{% for r in rows %}<tr><td><a href="{{url_for('admin_detail' if admin else 'detail',ref=r.ref)}}">{{r.ref}}</a></td>
+{% if admin %}<td>{{r.username}}</td>{% endif %}<td>{{dept_label(r.slug)}}</td><td><span class="pill {{r.status}}">{{status_label(r.status)}}</span></td><td>{{r.created_at[:10]}}</td></tr>
+{% else %}<tr><td colspan="5">{{t('no_data')}}</td></tr>{% endfor %}</table></div>

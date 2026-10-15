@@ -1,0 +1,9 @@
+{% extends "base.html" %}{% block body %}
+<h1>{{t('dashboard')}}</h1>
+<div class="cards"><div class="card"><small>{{t('total')}}</small><b>{{s.total}}</b></div>
+<div class="card"><small>{{t('in_progress_c')}}</small><b>{{s.in_progress}}</b></div>
+<div class="card"><small>{{t('completed_c')}}</small><b>{{s.resolved}}</b></div>
+<div class="card"><small>{{t('pending_c')}}</small><b>{{s.pending}}</b></div></div>
+<div class="card"><h3>{{t('by_dept')}}</h3>
+{% for d in by_dept %}<div class="bar"><span>{{dept_label(d.slug)}}</span><i style="width:{{(d.c*100/(s.total or 1))|round|int}}%"></i><em>{{d.c}}</em></div>{% endfor %}</div>
+<div class="card">{% include "_list.html" %}</div>{% endblock %}

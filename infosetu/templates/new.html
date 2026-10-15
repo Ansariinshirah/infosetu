@@ -1,0 +1,13 @@
+{% extends "base.html" %}{% block body %}
+<h1>{{t('edit') if editing else t('new_request')}}</h1>
+<div class="flash">{{t('hint_lang').format(dict(LANGS)[lang])}}</div>
+<form method="post" enctype="multipart/form-data" class="card narrow"><input type="hidden" name="_t" value="{{tok}}">
+<label>{{t('full_name')}} *</label><input name="full_name" value="{{v.full_name}}" required>
+<label>{{t('email')}} *</label><input name="email" type="email" value="{{v.email}}" required>
+<label>{{t('department')}} *</label><select name="dept">{% for d in depts() %}<option value="{{d.id}}" {{'selected' if v.dept|string==d.id|string}}>{{dept_label(d.slug)}}</option>{% endfor %}</select>
+<label>{{t('category')}} *</label><input name="category" value="{{v.category}}" placeholder="{{t('ph_cat')}}" required>
+<label>{{t('description')}} *</label><textarea name="description" rows="6" placeholder="{{t('ph_desc')}}" required>{{v.description}}</textarea>
+<label>{{t('documents')}} * <small>({{t('doc_hint')}})</small></label>
+<input type="file" name="document" accept=".pdf,.jpg,.jpeg,.png" {{'' if has_doc else 'required'}}>
+{% if has_doc %}<small>{{t('keep_doc')}}</small>{% endif %}
+<button>{{t('save') if editing else t('submit')}}</button></form>{% endblock %}

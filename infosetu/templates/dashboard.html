@@ -1,0 +1,13 @@
+{% extends "base.html" %}{% block body %}
+<h1>{{t('welcome')}}, {{me.username}}!</h1><p>{{t('tagline')}}</p>
+<div class="cards"><div class="card"><small>{{t('total')}}</small><b>{{s.total}}</b></div>
+<div class="card"><small>{{t('in_progress_c')}}</small><b>{{s.in_progress}}</b></div>
+<div class="card"><small>{{t('completed_c')}}</small><b>{{s.resolved}}</b></div>
+<div class="card"><small>{{t('pending_c')}}</small><b>{{s.pending}}</b></div></div>
+<div class="grid"><div class="card"><h3>{{t('recent')}}</h3>
+{% for r in recent %}<p><a href="{{url_for('detail',ref=r.ref)}}">{{r.ref}}</a> · {{dept_label(r.slug)}} <span class="pill {{r.status}}">{{status_label(r.status)}}</span></p>{% else %}<p>{{t('no_data')}}</p>{% endfor %}
+<a class="btn" href="{{url_for('new_request')}}">+ {{t('new_request')}}</a></div>
+<div class="card"><h3>{{t('notifications')}}</h3>
+{% for n in notes %}<p class="{{'' if n.is_read else 'unread'}}">{{t('notif_msg').format(n.ref,status_label(n.status))}}<br><small>{{n.at}}</small></p>{% else %}<p>{{t('no_data')}}</p>{% endfor %}
+{% if notes %}<form method="post" action="{{url_for('read_notes')}}"><input type="hidden" name="_t" value="{{tok}}"><button>{{t('mark_read')}}</button></form>{% endif %}</div></div>
+{% endblock %}

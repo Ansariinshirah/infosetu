@@ -1,0 +1,19 @@
+{% extends "base.html" %}{% block body %}
+<h1>{{r.ref}} <span class="pill {{r.status}}">{{status_label(r.status)}}</span></h1>
+<div class="grid"><div class="card">
+<p><b>{{t('department')}}:</b> {{dept_label(r.slug)}}</p><p><b>{{t('category')}}:</b> {{r.category}}</p>
+{% if admin %}<p><b>{{t('requester')}}:</b> {{r.username}}</p>{% endif %}
+<p><b>{{t('full_name')}}:</b> {{r.full_name or '-'}}</p><p><b>{{t('email')}}:</b> {{r.email or '-'}}</p>
+{% if admin and r.quality is not none %}<p><b>{{t('quality')}}:</b> {{r.quality}}/100</p>{% endif %}
+{% if r.doc_file %}<p><b>{{t('documents')}}:</b> <a href="{{url_for('admin_doc' if admin else 'my_doc',ref=r.ref)}}">⬇ {{r.doc_name}}</a></p>{% endif %}
+<p><b>{{t('original_lang')}}:</b> {{dict(LANGS)[r.lang]}}</p>
+<p><b>{{t('description')}}:</b></p><p class="desc">{{r.description}}</p>
+{% if r.remarks %}<p><b>{{t('remarks')}}:</b> {{r.remarks}}</p>{% endif %}
+{% if not admin %}{% if r.status=='submitted' %}<a class="btn" href="{{url_for('edit',ref=r.ref)}}">{{t('edit')}}</a>{% else %}<small>{{t('locked')}}</small>{% endif %}{% endif %}</div>
+<div class="card"><h3>{{t('timeline')}}</h3>
+{% for h in hist %}<p>● {{status_label(h.status)}} — <small>{{h.at}}</small>{% if h.remark %}<br><small>{{h.remark}}</small>{% endif %}</p>{% endfor %}
+{% if admin %}<form method="post"><input type="hidden" name="_t" value="{{tok}}"><hr>
+<label>{{t('status')}}</label><select name="status">{% for s in STATUSES %}<option value="{{s}}" {{'selected' if s==r.status}}>{{status_label(s)}}</option>{% endfor %}</select>
+<label>{{t('department')}}</label><select name="dept">{% for d in depts() %}<option value="{{d.id}}" {{'selected' if d.id==r.dept_id}}>{{dept_label(d.slug)}}</option>{% endfor %}</select>
+<label>{{t('remarks')}}</label><textarea name="remark" rows="3"></textarea><button>{{t('update')}}</button></form>{% endif %}</div></div>
+{% endblock %}

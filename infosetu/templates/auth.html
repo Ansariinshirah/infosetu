@@ -1,0 +1,10 @@
+{% extends "base.html" %}{% block body %}
+<div class="auth"><div class="hero"><h1>InfoSetu</h1><p>{{t('tagline')}}</p></div>
+<form method="post" class="card"><input type="hidden" name="_t" value="{{tok}}">
+<h2>{{t('welcome') if mode=='login' else t('create_account')}}</h2>
+<input name="username" placeholder="{{t('username')}}" required>
+<input name="password" type="password" placeholder="{{t('password')}}" required>
+{% if mode=='signup' %}<input name="confirm" type="password" placeholder="{{t('confirm')}}" required>{% endif %}
+<button>{{t('login') if mode=='login' else t('create_account')}}</button>
+<p><a href="{{url_for('signup' if mode=='login' else 'login')}}">{{t('signup') if mode=='login' else t('login')}}</a></p></form></div>
+{% endblock %}

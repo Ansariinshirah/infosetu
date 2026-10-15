@@ -1,0 +1,14 @@
+<!doctype html><html lang="{{lang}}"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>InfoSetu</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{url_for('static',filename='style.css')}}?v=5">
+<style>body{background:linear-gradient(135deg,#d9f5ec 0%,#dcecfb 25%,#e8e1fb 50%,#fde3ee 75%,#fff0dc 100%) fixed !important}</style>
+</head><body>
+{% if me %}<aside><h2>◆ InfoSetu</h2>
+{% if me.role=='admin' %}<a href="{{url_for('admin')}}">{{t('dashboard')}}</a><a href="{{url_for('admin_users')}}">{{t('users')}}</a>
+{% else %}<a href="{{url_for('dashboard')}}">{{t('dashboard')}}</a><a href="{{url_for('new_request')}}">{{t('new_request')}}</a><a href="{{url_for('my_requests')}}">{{t('my_requests')}}</a>{% endif %}
+<a href="{{url_for('logout')}}">{{t('logout')}}</a></aside>{% endif %}
+<main class="{{'side' if me}}"><div class="top"><span>{% if me %}{{me.username}}{% endif %}</span>
+<span class="langs">{% for c,n in LANGS %}<a class="{{'on' if c==lang}}" href="{{url_for('set_lang',code=c)}}">{{n}}</a>{% endfor %}</span></div>
+{% for m in get_flashed_messages() %}<div class="flash">{{m}}</div>{% endfor %}
+{% block body %}{% endblock %}</main></body></html>
